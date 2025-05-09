@@ -6,7 +6,7 @@ on:
       jobs_to_run:
         description: "Comma-separated jobs to run (e.g. job-a,job-c)"
         required: true
-        default: "job-a,job-c"
+        default: "job-b,job-c"
 
 jobs:
   job-a:
