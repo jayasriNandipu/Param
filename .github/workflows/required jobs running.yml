@@ -1,33 +1,31 @@
-name: Run Multiple Jobs Example
+name: Run Job A and Job C
 
 on:
   workflow_dispatch:
     inputs:
       jobs_to_run:
-        description: 'Select jobs to run'
+        description: 'Comma-separated jobs to run (e.g. job-a,job-c)'
         required: true
-        type: choice
-        default: 'job-a,job-c'  # Default selection (optional)
-        options:
-          - job-a
-          - job-b
-          - job-c
+        default: 'job-a,job-c'
 
 jobs:
   job-a:
     if: contains(github.event.inputs.jobs_to_run, 'job-a')
     runs-on: ubuntu-latest
     steps:
-      - run: echo "✅ Running Job A"
+      - name: Run Job A
+        run: echo "✅ Running Job A"
 
   job-b:
     if: contains(github.event.inputs.jobs_to_run, 'job-b')
     runs-on: ubuntu-latest
     steps:
-      - run: echo "✅ Running Job B"
+      - name: Run Job B
+        run: echo "✅ Running Job B"
 
   job-c:
     if: contains(github.event.inputs.jobs_to_run, 'job-c')
     runs-on: ubuntu-latest
     steps:
-      - run: echo "✅ Running Job C"
+      - name: Run Job C
+        run: echo "✅ Running Job C"
