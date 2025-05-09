@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       job_to_run:
-        description: "job-a"
+        description: job-a
         required: true
         type: choice
         options:
