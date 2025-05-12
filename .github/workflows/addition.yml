@@ -34,3 +34,23 @@ jobs:
           num2=${{ github.event.inputs.num2 }}
           difference=$((num1 - num2))
           echo "➖ Difference: $difference"
+  multiplication:
+    name: multiplication Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Perform multiplication
+        run: |
+          num1=${{ github.event.inputs.num1 }}
+          num2=${{ github.event.inputs.num2 }}
+          mul=$((num1 * num2))
+          echo "➖ Product: $product"
+  quotient:
+    name: quotient Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Perform quotient
+        run: |
+          num1=${{ github.event.inputs.num1 }}
+          num2=${{ github.event.inputs.num2 }}
+           quotient=$((num1 / num2))
+          echo "➖ quotient: $quotient"
