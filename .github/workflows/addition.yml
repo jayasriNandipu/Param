@@ -11,8 +11,12 @@ on:
         description: "Second number"
         required: true
         default: "5"
-    required: true
-    default = addition,subtraction
+    operation:
+        description: "Choose operation (addition, subtraction, multiplication, quotient)"
+        required: true
+        default: "addition, "
+    
+  
 
 jobs:
   addition:
