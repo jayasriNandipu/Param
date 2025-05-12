@@ -1,6 +1,6 @@
 name: Run Selected Jobs
 
-on: [push]
+on: push
   workflow_dispatch:
     inputs:
       jobs_to_run:
