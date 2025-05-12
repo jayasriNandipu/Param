@@ -1,0 +1,36 @@
+name: Arithmetic Operations
+
+on:
+  workflow_dispatch:
+    inputs:
+      num1:
+        description: "First number"
+        required: true
+        default: "10"
+      num2:
+        description: "Second number"
+        required: true
+        default: "5"
+
+jobs:
+  addition:
+    name: Addition Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Perform Addition
+        run: |
+          num1=${{ github.event.inputs.num1 }}
+          num2=${{ github.event.inputs.num2 }}
+          sum=$((num1 + num2))
+          echo "➕ Sum: $sum"
+
+  subtraction:
+    name: Subtraction Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Perform Subtraction
+        run: |
+          num1=${{ github.event.inputs.num1 }}
+          num2=${{ github.event.inputs.num2 }}
+          difference=$((num1 - num2))
+          echo "➖ Difference: $difference"
