@@ -12,9 +12,9 @@ on:
         required: true
         default: "5"
       operation:
-        description: "Choose operation (addition, subtraction, multiplication, quotient)"
+        description: "Choose operation (addition, subtraction, product, quotient)"
         required: true
-        default: "addition, multiplication"
+        default: "addition, product"
     
   
 
@@ -40,11 +40,11 @@ jobs:
           num2=${{ github.event.inputs.num2 }}
           difference=$((num1 - num2))
           echo "➖ Difference: $difference"
-  multiplication:
+  product:
     name: multiplication Job
     runs-on: ubuntu-latest
     steps:
-      - name: Perform multiplication
+      - name: Perform product
         run: |
           num1=${{ github.event.inputs.num1 }}
           num2=${{ github.event.inputs.num2 }}
