@@ -14,7 +14,7 @@ on:
       operations:
         description: "Select operations (comma-separated: add, subtract, multiply, divide)"
         required: true
-        default: "add,subtract"
+        default: "add,multiply"
 
 jobs:
   determine-operations:
