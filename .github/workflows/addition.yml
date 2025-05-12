@@ -11,10 +11,10 @@ on:
         description: "Second number"
         required: true
         default: "5"
-    operation:
+      operation:
         description: "Choose operation (addition, subtraction, multiplication, quotient)"
         required: true
-        default: "addition, "
+        default: "addition, multiplication"
     
   
 
