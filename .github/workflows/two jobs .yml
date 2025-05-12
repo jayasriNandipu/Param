@@ -3,10 +3,10 @@ name: Run Selected Jobs
 on:
   workflow_dispatch:
     inputs:
-      jobs_to_run: 
+      jobs_to_run: "job-b,job-c"
         description: "Comma-separated jobs to run (e.g. job-a,job-c)"
         required: true
-        default: "job-b,job-c"
+        # default: "job-b,job-c"
 
 jobs:
   job-a:
