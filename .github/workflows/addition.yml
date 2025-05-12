@@ -12,14 +12,13 @@ on:
         required: true
         default: "5"
       operation:
-        description: "Choose operation (addition, subtraction, product, quotient)"
+        description: "Choose operation (add, subtract, multiply, divide)"
         required: true
-        default: "addition, product"
-    
-  
+        default: "add, multiply"
 
 jobs:
   addition:
+    if: github.event.inputs.operation == 'add'
     name: Addition Job
     runs-on: ubuntu-latest
     steps:
@@ -28,9 +27,10 @@ jobs:
           num1=${{ github.event.inputs.num1 }}
           num2=${{ github.event.inputs.num2 }}
           sum=$((num1 + num2))
-          echo "➕ Sum: $sum"
+          echo "Sum: $sum"
 
   subtraction:
+    if: github.event.inputs.operation == 'subtract'
     name: Subtraction Job
     runs-on: ubuntu-latest
     steps:
@@ -39,24 +39,33 @@ jobs:
           num1=${{ github.event.inputs.num1 }}
           num2=${{ github.event.inputs.num2 }}
           difference=$((num1 - num2))
-          echo "➖ Difference: $difference"
-  product:
-    name: multiplication Job
+          echo "Difference: $difference"
+
+  multiplication:
+    if: github.event.inputs.operation == 'multiply'
+    name: Multiplication Job
     runs-on: ubuntu-latest
     steps:
-      - name: Perform product
+      - name: Perform Multiplication
         run: |
           num1=${{ github.event.inputs.num1 }}
           num2=${{ github.event.inputs.num2 }}
-          mul=$((num1 * num2))
-          echo "➖ Product: $product"
-  quotient:
-    name: quotient Job
+          product=$((num1 * num2))
+          echo "Product: $product"
+
+  division:
+    if: github.event.inputs.operation == 'divide'
+    name: Division Job
     runs-on: ubuntu-latest
     steps:
-      - name: Perform quotient
+      - name: Perform Division
         run: |
           num1=${{ github.event.inputs.num1 }}
           num2=${{ github.event.inputs.num2 }}
-           quotient=$((num1 / num2))
-          echo "➖ quotient: $quotient"
+          if [ "$num2" -ne 0 ]; then
+            quotient=$((num1 / num2))
+            echo "Quotient: $quotient"
+          else
+            echo "Division by zero is not allowed"
+            exit 1
+          fi
