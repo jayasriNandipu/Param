@@ -11,6 +11,8 @@ on:
         description: "Second number"
         required: true
         default: "5"
+    required: true
+    default = addition,subtraction
 
 jobs:
   addition:
