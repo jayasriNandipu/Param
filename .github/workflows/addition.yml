@@ -14,12 +14,21 @@ on:
       operation:
         description: "Choose operation (add, subtract, multiply, divide)"
         required: true
-        default: "add, multiply"
+        default: "add, subtract"
 
 jobs:
+  determine-operation:
+    runs-on: ubuntu-latest
+    outputs:
+      selected-operation: ${{ steps.set-operation.outputs.operation }}
+    steps:
+      - name: Set Selected Operation
+        id: set-operation
+        run: echo "operation=${{ github.event.inputs.operation }}" >> $GITHUB_OUTPUT
+
   addition:
-    if: github.event.inputs.operation == 'add'
-    name: Addition Job
+    needs: determine-operation
+    if: needs.determine-operation.outputs.selected-operation == 'add'
     runs-on: ubuntu-latest
     steps:
       - name: Perform Addition
@@ -30,8 +39,8 @@ jobs:
           echo "Sum: $sum"
 
   subtraction:
-    if: github.event.inputs.operation == 'subtract'
-    name: Subtraction Job
+    needs: determine-operation
+    if: needs.determine-operation.outputs.selected-operation == 'subtract'
     runs-on: ubuntu-latest
     steps:
       - name: Perform Subtraction
@@ -42,8 +51,8 @@ jobs:
           echo "Difference: $difference"
 
   multiplication:
-    if: github.event.inputs.operation == 'multiply'
-    name: Multiplication Job
+    needs: determine-operation
+    if: needs.determine-operation.outputs.selected-operation == 'multiply'
     runs-on: ubuntu-latest
     steps:
       - name: Perform Multiplication
@@ -54,8 +63,8 @@ jobs:
           echo "Product: $product"
 
   division:
-    if: github.event.inputs.operation == 'divide'
-    name: Division Job
+    needs: determine-operation
+    if: needs.determine-operation.outputs.selected-operation == 'divide'
     runs-on: ubuntu-latest
     steps:
       - name: Perform Division
@@ -63,9 +72,3 @@ jobs:
           num1=${{ github.event.inputs.num1 }}
           num2=${{ github.event.inputs.num2 }}
           if [ "$num2" -ne 0 ]; then
-            quotient=$((num1 / num2))
-            echo "Quotient: $quotient"
-          else
-            echo "Division by zero is not allowed"
-            exit 1
-          fi
