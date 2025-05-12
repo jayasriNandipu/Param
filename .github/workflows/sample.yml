@@ -1,0 +1,38 @@
+name: Run Selected Jobs
+
+on:
+  workflow_dispatch:
+    inputs:
+      jobs_to_run:
+        description: "Comma-separated jobs to run (e.g. job-a,job-c)"
+        required: true
+        default: "job-b,job-c"
+
+jobs:
+  job-a:
+    if: contains(github.event.inputs.jobs_to_run, 'job-a')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Job A
+        run: echo "✅ Running Job A"
+
+  job-b:
+    if: contains(github.event.inputs.jobs_to_run, 'job-b')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Job B
+        run: echo "✅ Running Job B"
+
+  job-c:
+    if: contains(github.event.inputs.jobs_to_run, 'job-c')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Job C
+        run: echo "✅ Running Job C"
+  job-d:
+    if: contains(github.event.inputs.jobs_to_run, 'job-d')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Job d
+        run: echo "✅ Running Job d"
+  
