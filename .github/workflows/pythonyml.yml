@@ -15,6 +15,6 @@ data = {
 with open('output.yaml', 'w') as file:
     yaml.dump(data, file, default_flow_style=False, sort_keys=False)
 
-# Optional: Convert the dictionary to a YAML-formatted string and print it
+# Convert the dictionary to a YAML-formatted string and print it
 yaml_string = yaml.dump(data, default_flow_style=False, sort_keys=False)
 print(yaml_string)
