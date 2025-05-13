@@ -1,22 +1,16 @@
-name: Run Addition Every 30 Minutes
+name: Scheduled Workflow
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # Every 30 minutes
-  workflow_dispatch:         # Optional manual trigger
+    - cron: '*/5 * * * *'  # Runs every 5 minutes
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
-  run-addition:
+  run-script:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-
-      - name: Run the addition script
-        run: python add.py
+      - name: Run script
+        run: bash your-script.sh  # Replace with your actual file
