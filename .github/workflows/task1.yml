@@ -25,10 +25,6 @@ jobs:
     steps:
       - run: echo "Running Job B"
 
-  job-c:
-    if: ${{ github.event.inputs.job_to_run == 'job-c' }}
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Running Job C"
+
 
 
