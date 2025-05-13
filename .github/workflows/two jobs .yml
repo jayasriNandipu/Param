@@ -11,21 +11,21 @@ on:
 jobs:
   job-a:
     if: contains(github.event.inputs.jobs_to_run, 'job-a')
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Run Job A
         run: echo "✅ Running Job A"
 
   job-b:
     if: contains(github.event.inputs.jobs_to_run, 'job-b')
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Run Job B
         run: echo "✅ Running Job B"
 
   job-c:
     if: contains(github.event.inputs.jobs_to_run, 'job-c')
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Run Job C
         run: echo "✅ Running Job C"
