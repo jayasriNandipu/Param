@@ -1,0 +1,20 @@
+import yaml
+
+# Sample Python dictionary
+data = {
+    'name': 'John Doe',
+    'age': 30,
+    'skills': ['Python', 'Data Analysis', 'Machine Learning'],
+    'details': {
+        'employed': True,
+        'experience': 5
+    }
+}
+
+# Write the dictionary to a YAML file
+with open('output.yaml', 'w') as file:
+    yaml.dump(data, file, default_flow_style=False, sort_keys=False)
+
+# Convert the dictionary to a YAML-formatted string and print it
+yaml_string = yaml.dump(data, default_flow_style=False, sort_keys=False)
+print(yaml_string)
