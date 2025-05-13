@@ -1,4 +1,4 @@
-name: Run Python and Generate YAML
+name: Run Python Script
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  execute_python:
+  execute:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -18,11 +18,16 @@ jobs:
           python-version: '3.9'
 
       - name: Install Dependencies
-        run: pip install pyyaml
+        run: pip install -r requirements.txt
 
       - name: Run Python Script
         run: python script.py
 
-      - name: Verify YAML Output
-        run: cat output.yaml
-
+version: '3.8'
+services:
+  python-app:
+    image: python:3.9
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: python script.py
