@@ -2,7 +2,7 @@ name: Run Addition Every 30 Minutes
 
 on:
   schedule:
-    - cron: '*/30 * * * *'  # Every 30 minutes
+    - cron: '*/5 * * * *'  # Every 30 minutes
   workflow_dispatch:         # Optional manual trigger
 
 jobs:
