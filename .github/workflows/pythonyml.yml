@@ -1,12 +1,9 @@
-name: Run Python Script
+name: Basic Workflow
 
-on:
-  push:
-    branches:
-      - main
+on: push
 
 jobs:
-  execute:
+  example:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -20,14 +17,9 @@ jobs:
       - name: Install Dependencies
         run: pip install -r requirements.txt
 
+      - name: Print Hello
+        run: echo "Hello, world!"
+
       - name: Run Python Script
         run: python script.py
 
-version: '3.8'
-services:
-  python-app:
-    image: python:3.9
-    volumes:
-      - .:/app
-    working_dir: /app
-    command: python script.py
