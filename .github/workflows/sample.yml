@@ -23,16 +23,4 @@ jobs:
       - name: Run Job B
         run: echo "✅ Running Job B"
 
-  job-c:
-    if: contains(github.event.inputs.jobs_to_run, 'job-c')
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run Job C
-        run: echo "✅ Running Job C"
-  job-d:
-    if: contains(github.event.inputs.jobs_to_run, 'job-d')
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run Job d
-        run: echo "✅ Running Job d"
-  
+
