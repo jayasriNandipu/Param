@@ -1,0 +1,15 @@
+name: Event-Driven Workflow
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  handle-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Respond to issue
+        run: echo "An issue has been opened!"
