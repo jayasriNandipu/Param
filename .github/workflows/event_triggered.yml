@@ -1,0 +1,15 @@
+name: PR Event Workflow
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  check-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run PR validation
+        run: echo "Validating pull request..."
