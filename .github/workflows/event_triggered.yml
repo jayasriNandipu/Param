@@ -1,15 +1,26 @@
-name: PR Event Workflow
+name: Event-Triggered Workflow
 
 on:
   pull_request:
-    types: [opened]
+    types: [opened, synchronize, reopened]
 
 jobs:
-  check-pr:
+  pr-validation:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Run PR validation
-        run: echo "Validating pull request..."
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run validation tests
+        run: npm test
+
+      - name: Post validation result
+        run: echo "Pull request validation completed."
