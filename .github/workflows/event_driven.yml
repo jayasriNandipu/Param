@@ -1,24 +1,16 @@
-name: Event-Driven Workflow
+name: Issue Comment Workflow
 
 on:
   issues:
     types: [opened]
 
 jobs:
-  process-issue:
+  comment-on-issue:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Create response comment
-        uses: actions/github-script@v6
+      - name: Post a comment on the issue
+        uses: peter-evans/create-issue-comment@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.payload.issue.number,
-              body: "Thanks for opening this issue! Our team will review it soon."
-            })
+          issue-number: ${{ github.event.issue.number }}
+          body: "Thanks for opening this issue! We’ll review it and get back to you soon."
