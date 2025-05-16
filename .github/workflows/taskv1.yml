@@ -6,72 +6,72 @@ on:
       - master
 
 jobs:
-  # Backend build
   backend-build:
+    name: Backend Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Backend Build
+      - name: Build Backend
         run: |
           echo "Running backend build..."
-          # Replace with actual backend build command
+          # Add backend build commands here
 
-  # Frontend build
   frontend-build:
+    name: Frontend Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Frontend Build
+      - name: Build Frontend
         run: |
           echo "Running frontend build..."
-          # Replace with actual frontend build command
+          # Add frontend build commands here
 
-  # Backend Unit Test A
   backend-unit-test-a:
+    name: Backend Unit Test A
     needs: backend-build
     runs-on: ubuntu-latest
     steps:
-      - name: Backend Unit Test A
+      - name: Run Backend Unit Test A
         run: |
           echo "Running Backend Unit Test A..."
-          # Replace with actual test command
+          # Add test commands here
 
-  # Backend Unit Test B
   backend-unit-test-b:
+    name: Backend Unit Test B
     needs: backend-build
     runs-on: ubuntu-latest
     steps:
-      - name: Backend Unit Test B
+      - name: Run Backend Unit Test B
         run: |
           echo "Running Backend Unit Test B..."
-          # Replace with actual test command
+          # Add test commands here
 
-  # Frontend Unit Test A
   frontend-unit-test-a:
+    name: Frontend Unit Test A
     needs: frontend-build
     runs-on: ubuntu-latest
     steps:
-      - name: Frontend Unit Test A
+      - name: Run Frontend Unit Test A
         run: |
           echo "Running Frontend Unit Test A..."
-          # Replace with actual test command
+          # Add test commands here
 
-  # Frontend Unit Test B
   frontend-unit-test-b:
+    name: Frontend Unit Test B
     needs: frontend-build
     runs-on: ubuntu-latest
     steps:
-      - name: Frontend Unit Test B
+      - name: Run Frontend Unit Test B
         run: |
           echo "Running Frontend Unit Test B..."
-          # Replace with actual test command
+          # Add test commands here
 
-  # End-to-End Test
   e2e-test:
+    name: End-to-End Test
     needs:
       - backend-unit-test-a
       - backend-unit-test-b
@@ -79,13 +79,13 @@ jobs:
       - frontend-unit-test-b
     runs-on: ubuntu-latest
     steps:
-      - name: Run End-to-End Tests
+      - name: Run E2E Tests
         run: |
           echo "Running End-to-End Tests..."
-          # Replace with actual E2E test command
+          # Add E2E testing commands here
 
-  # Deploy to Staging
   deploy-staging:
+    name: Deploy Staging
     needs: e2e-test
     runs-on: ubuntu-latest
     steps:
@@ -93,14 +93,15 @@ jobs:
         run: |
           echo "Deploying to Staging..."
           echo "URL: https://www.staging.interstellar.dev"
-          # Replace with actual deploy-to-staging script
+          # Add staging deploy commands here
 
-  # Deploy to Production
   deploy-production:
+    name: Deploy Production
     needs: deploy-staging
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to Production
         run: |
           echo "Deploying to Production..."
-          # Replace with actual deploy-to-production script
+          # Add production deploy commands here
+
