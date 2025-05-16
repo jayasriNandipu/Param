@@ -1,4 +1,4 @@
-name: Deploy Application
+name: Debug Workflow
 
 on:
   push:
@@ -6,102 +6,32 @@ on:
       - master
 
 jobs:
-  backend-build:
-    name: Backend Build
+  debug-job:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Build Backend
+      - name: Echo a custom message
+        run: echo "🛠️ Starting debug job for commit ${{ github.sha }}"
+
+      - name: Print Environment Variables
+        run: env
+
+      - name: Print GitHub Context
+        run: echo "${{ toJson(github) }}"
+
+      - name: Run a command that might fail
         run: |
-          echo "Running backend build..."
-          # Add backend build commands here
+          echo "Trying to list a nonexistent directory..."
+          ls /nonexistent || echo "⚠️ ls failed, but we continue."
 
-  frontend-build:
-    name: Frontend Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+      - name: Continue on Error Example
+        run: exit 1
+        continue-on-error: true
 
-      - name: Build Frontend
-        run: |
-          echo "Running frontend build..."
-          # Add frontend build commands here
-
-  backend-unit-test-a:
-    name: Backend Unit Test A
-    needs: backend-build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run Backend Unit Test A
-        run: |
-          echo "Running Backend Unit Test A..."
-          # Add test commands here
-
-  backend-unit-test-b:
-    name: Backend Unit Test B
-    needs: backend-build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run Backend Unit Test B
-        run: |
-          echo "Running Backend Unit Test B..."
-          # Add test commands here
-
-  frontend-unit-test-a:
-    name: Frontend Unit Test A
-    needs: frontend-build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run Frontend Unit Test A
-        run: |
-          echo "Running Frontend Unit Test A..."
-          # Add test commands here
-
-  frontend-unit-test-b:
-    name: Frontend Unit Test B
-    needs: frontend-build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run Frontend Unit Test B
-        run: |
-          echo "Running Frontend Unit Test B..."
-          # Add test commands here
-
-  e2e-test:
-    name: End-to-End Test
-    needs:
-      - backend-unit-test-a
-      - backend-unit-test-b
-      - frontend-unit-test-a
-      - frontend-unit-test-b
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run E2E Tests
-        run: |
-          echo "Running End-to-End Tests..."
-          # Add E2E testing commands here
-
-  deploy-staging:
-    name: Deploy Staging
-    needs: e2e-test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to Staging
-        run: |
-          echo "Deploying to Staging..."
-          echo "URL: https://www.staging.interstellar.dev"
-          # Add staging deploy commands here
-
-  deploy-production:
-    name: Deploy Production
-    needs: deploy-staging
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to Production
-        run: |
-          echo "Deploying to Production..."
-          # Add production deploy commands here
-
+      # Optional: SSH into the runner for live debugging (remove if not needed)
+      - name: Start SSH debugging session (tmate)
+        uses: mxschmitt/action-tmate@v3
+        if: always()
